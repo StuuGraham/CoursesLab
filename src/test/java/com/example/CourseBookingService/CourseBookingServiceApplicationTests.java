@@ -1,6 +1,5 @@
 package com.example.CourseBookingService;
 
-import com.example.CourseBookingService.models.Booking;
 import com.example.CourseBookingService.models.Course;
 import com.example.CourseBookingService.models.Customer;
 import com.example.CourseBookingService.repositories.BookingRepository;
@@ -50,17 +49,18 @@ class CourseBookingServiceApplicationTests {
 
 	@Test
 	public void canFindCoursesForCustomer() {
-		List<Course> foundCourses = courseRepository.findAllByBookingsCustomerOrderByCourseIdAsc(2L);
-		assertEquals(2, foundCourses.size());
-		assertEquals("Learn Java", foundCourses.get(0).getName());
-		// Why has first saved course been moved to position 2 in list after second course saved??
 
-		List<Course> stuartsCourses = courseRepository.findAllByBookingsCustomerOrderByCourseIdAsc(1L);
+		List<Course> foundCourses = courseRepository.findAllByBookingsCustomerIdOrderByIdAsc(2L);
+		assertEquals(2, foundCourses.size());
+		assertEquals("Learn Python", foundCourses.get(0).getName());
+//		 Why has first saved course been moved to position 2 in list after second course saved??
+
+		List<Course> stuartsCourses = courseRepository.findAllByBookingsCustomerIdOrderByIdAsc(1L);
 		assertEquals(2, stuartsCourses.size());
 		assertEquals("Learn Python", stuartsCourses.get(0).getName());
 
-		List<Course> johnsCourses = courseRepository.findAllByBookingsCustomerOrderByCourseIdAsc(4L);
+		List<Course> johnsCourses = courseRepository.findAllByBookingsCustomerIdOrderByIdAsc(4L);
 		assertEquals(2, johnsCourses.size());
-		assertEquals("Learn Java", johnsCourses.get(1).getName());
+		assertEquals("Learn React", johnsCourses.get(1).getName());
 	}
 }
